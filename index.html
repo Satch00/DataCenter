@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História - Questões e Respostas</title>
+    <!-- Fonte Google Inter para design moderno -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0b14;
+            --card-bg: #1a0f24;
+            --wine-red: #800020;
+            --violet-purple: #7b2cbf;
+            --bright-violet: #9d4edd;
+            --accent-pink: #e0aaff;
+            --text-primary: #f3e8ee;
+            --text-secondary: #c4b5fd;
+            --border-color: #3c1642;
+            --code-bg: #12081c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            padding: 40px 20px;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(128, 0, 32, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(123, 44, 191, 0.25) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--wine-red) 0%, var(--violet-purple) 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(123, 44, 191, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--accent-pink);
+            font-weight: 300;
+        }
+
+        .json-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 15px 25px;
+            border-radius: 12px 12px 0 0;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+        }
+
+        .json-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-pink);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .json-title::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--bright-violet);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--bright-violet);
+        }
+
+        .copy-btn {
+            background: linear-gradient(90deg, var(--wine-red), var(--violet-purple));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(157, 78, 221, 0.4);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0 0 16px 16px;
+            padding: 25px;
+            overflow-x: auto;
+            max-height: 700px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.92rem;
+            color: var(--text-primary);
+        }
+
+        /* JSON Syntax Highlighting */
+        .json-key { color: var(--accent-pink); font-weight: 500; }
+        .json-string { color: #f2a65a; }
+        .json-number { color: #e599f7; }
+        .json-boolean { color: #ff8787; }
+        .json-null { color: #ff8787; }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Material de História - Curricular</h1>
+        <p>Base de Dados de Questões e Respostas Extraídas do Livro do Estudante</p>
+    </header>
+
+    <div class="json-header">
+        <div class="json-title">conteudo_historia.json</div>
+        <button class="copy-btn" onclick="copyJson()">Copiar JSON</button>
+    </div>
+
+    <pre><code id="json-code"></code></pre>
+
+    <footer>
+        <p>Design moderno em paleta Vermelho Vinho (#800020) & Roxo Violeta (#7B2CBF)</p>
+    </footer>
+</div>
+
+<script>
+const historiaData = {
+  "disciplina": "História",
+  "livro": "Currículo em Ação - Volume 4 - 3ª Série do Ensino Médio",
+  "aulas": [
+    {
+      "aula": 1,
+      "titulo": "\"Integrar para não entregar\": a ausência de direitos e a violência aos povos indígenas na ditadura",
+      "questoes": [
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 1,
+          "pergunta": "É possível afirmar que o jornal adotou uma postura favorável ou contrária às práticas do Serviço de Proteção ao Índio (SPI), investigado no relatório? Justifique. Por que o governo brasileiro resolveu extinguir o SPI?",
+          "resposta": "O notícia apresenta um tom de denúncia, explorando os aspectos violentos das ações dos agentes do SPI contra os povos indígenas. O jornal condena enfaticamente essas práticas, destacando a gravidade dos crimes, como o extermínio de tribos inteiras, e menciona a postura do presidente da Comissão de Inquérito sobre Crimes no SPI, o procurador Jader Figueiredo Corrêa, que buscou intensificar as investigações por meio da criação de mais comissões para apurar as responsabilidades pelos abusos. A repercussão dessas denúncias, tanto na imprensa nacional quanto internacional, levou o governo brasileiro a revisar sua política indigenista. Nesse contexto, a criação de um novo órgão indigenista poderia ser uma solução para repensar essa política, ao mesmo tempo em que serviria para apaziguar as críticas. Essa medida, no entanto, também pode ser interpretada por parte da historiografia como uma estratégia para silenciar as investigações, evitando que os responsáveis pelos crimes contra os indígenas fossem devidamente punidos."
+        },
+        {
+          "secao": "Na Prática - Atividade 2",
+          "numero": 1,
+          "pergunta": "Liste os argumentos de cada autoridade sobre o papel dos indígenas na sociedade brasileira e, posteriormente, compare seus posicionamentos, identificando se há semelhanças ou divergências entre os discursos apresentados pelas duas fontes.",
+          "resposta": "O capitão da GRIN, Manuel dos Santos Pinheiro, defendia que os indígenas, assim como outros segmentos sociais, poderiam fazer um policiamento interno em suas comunidades, funcionando como uma espécie de 'guarda privada'. Por outro lado, o general Bandeira Mello tinha planos mais ambiciosos, propondo a integração dos indígenas à nação brasileira, desde que executassem trabalhos 'úteis', que produzissem lucro nas aldeias e contribuíssem para o enriquecimento do país. Embora os dois militares, em seus respectivos cargos, estivessem abordando aspectos diferentes da submissão dos indígenas à sociedade nacional, ambos convergiam na medida em que propunham meios de compelir os indígenas a fazerem parte da nação justamente quando abandonassem aspectos de suas práticas culturais e adotassem os padrões definidos pelo Estado nacional."
+        }
+      ]
+    },
+    {
+      "aula": 2,
+      "titulo": "Movimento Negro Unificado: luta contra o racismo e a repressão na ditadura militar",
+      "questoes": [
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 1,
+          "pergunta": "Como a Lei de Segurança Nacional de 1967 e a política externa do regime militar foram utilizadas para reprimir os movimentos negros no Brasil? De que maneira o discurso da democracia racial contribuiu para silenciar as denúncias de racismo?",
+          "resposta": "Ao utilizar a Lei de Segurança Nacional, o regime ditatorial enquadrou as denúncias dos movimentos negros contra o racismo, a discriminação e a violência policial como uma forma de 'propaganda adversa', que, nos termos do artigo 14, colocava em risco o 'bom nome, a autoridade, o crédito ou o prestígio do Brasil'. Esse enquadramento das críticas raciais à categoria de crime contra a segurança nacional operou como um mecanismo de silenciamento, pois transformava a própria exposição do racismo estrutural em um ato de subversão. Simultaneamente, a política exterior do regime, especialmente voltada para a África, sustentava-se na retórica da 'democracia racial' e na exaltação das raízes africanas da cultura brasileira, um discurso que não apenas ocultava a violência racial interna, mas também deslegitimava os movimentos negros como 'fatores adversos' que ameaçavam a 'harmonia racial' erigida como objetivo nacional."
+        },
+        {
+          "secao": "Na Prática - Atividade 2",
+          "numero": 1,
+          "pergunta": "Com base no jornal (Fonte I), por que é possível afirmar que periódicos ligados ao Movimento Negro, como o Sinba, foram instrumentos fundamentais para o fortalecimento da atuação da militância e da crítica à 'democracia racial', projeto nacional do regime militar? Explique considerando os argumentos do texto.",
+          "resposta": "Periódicos como o Sinba atuaram como contraponto à narrativa hegemônica, ao expor o mecanismo de desqualificação que recaía sobre manifestações negras como o Black Rio. O trecho revela que, diante da emergência do movimento, as perguntas dirigidas a seus líderes (sobre suposto racismo, alienação ou modismo) refletiam o padrão discriminatório que historicamente estigmatiza qualquer expressão autônoma da população negra. Ao veicular denúncias desse tipo e inverter a lógica, questionando se tais acusações não seriam elas próprias manifestações do racismo enraizado na sociedade, esses periódicos desconstruíam o discurso oficial da 'democracia racial'."
+        }
+      ]
+    },
+    {
+      "aula": 3,
+      "titulo": "Brasil amazônico e Chico Mendes: impactos dos modelos socioeconômicos no uso dos recursos naturais",
+      "questoes": [
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 1,
+          "pergunta": "Por que a exploração da borracha de certa forma 'adiou' a devastação da Floresta Amazônica? O que mudou a partir da década de 1970? Por que isso ocorreu? Em qual contexto político?",
+          "resposta": "Durante o ciclo da borracha no final do século XIX, a extração do látex não exigia a destruição da seringueira, pois o valor econômico estava na seiva, e não em sua madeira ou 'entranhas'; para que a produção continuasse, a árvore precisava ser mantida viva e saudável, o que reduzia significativamente os impactos diretos sobre a cobertura florestal. Já a partir da década de 1970, os governos militares brasileiros aprofundaram e redirecionaram processos de ocupação da Amazônia em uma nova escala: a motivação vinha de objetivos políticos e geopolíticos a fim de garantir o domínio nacional sobre a região. Essa vontade política, aliada à tecnologia disponível e ao fato de que não havia um impedimento biológico que obrigasse a manter a floresta em pé, abriu espaço para processos sociais e ambientais extremamente perversos, resultando na destruição massiva e predatória."
+        },
+        {
+          "secao": "Na Prática - Atividade 2",
+          "numero": 1,
+          "pergunta": "Qual foi a proposta inovadora dos seringueiros para conciliar a defesa da floresta com a garantia de direitos territoriais e melhores condições de vida?",
+          "resposta": "A proposta inovadora dos seringueiros foi a criação das Reservas Extrativistas (Resex), inspiradas no modelo das reservas indígenas. Essas reservas seriam territórios contínuos de propriedade da União, destinados ao usufruto de comunidades tradicionais (seringueiros, ribeirinhos, castanheiros) por meio de contratos de concessão de uso condicionados a planos de manejo dos recursos. Diferentemente da reforma agrária convencional, as reservas mantinham a terra como bem coletivo, conciliando a defesa da floresta com a garantia de direitos territoriais."
+        }
+      ]
+    },
+    {
+      "aula": 4,
+      "titulo": "Greves do ABC paulista: trabalhadores \"cruzam os braços\" em plena ditadura",
+      "questoes": [
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 1,
+          "pergunta": "Caracterizem dois instrumentos utilizados pela ditadura militar para controlar o sindicalismo brasileiro (Texto I). Em seguida, identifiquem a continuidade histórica estabelecida pelo autor entre essa prática e o período do Estado Novo.",
+          "resposta": "O primeiro instrumento foi a nomeação de interventores para os sindicatos, que funcionavam como extensões diretas do regime gerenciando concessões, repressão e perseguição. O segundo consistiu na proibição de participação em eleições sindicais de pessoas enquadradas ou investigadas pelos órgãos de repressão. A continuidade histórica com o Estado Novo reside na mesma lógica de controle do proletariado por meio da estrutura sindical oficial, subordinando as entidades ao Ministério do Trabalho para cooperar com o Estado."
+        },
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 2,
+          "pergunta": "Expliquem dois pontos de conflito entre o 'novo sindicalismo' do ABC paulista e a estrutura sindical oficial herdada do Estado Novo (Texto II), citando as reivindicações do movimento.",
+          "resposta": "O primeiro ponto de conflito reside na relação com o Estado: o novo sindicalismo reivindicava autonomia diante do Ministério do Trabalho e liberdade de organização, rompendo com a subordinação estatal. O segundo ponto diz respeito à organização no local de trabalho: enquanto o modelo oficial concentrava a representação na cúpula burocrática, o movimento do ABC defendia a criação de comissões de fábrica para atuar diretamente nas empresas sem controle patronal e estatal."
+        },
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 3,
+          "pergunta": "De que maneira as greves entre 1978 e 1980 fortaleceram o movimento sindical brasileiro e quais foram as principais reações do regime militar diante desse avanço?",
+          "resposta": "As greves fortaleceram o movimento sindical ao demonstrarem a capacidade de organização e disposição de luta dos trabalhadores em plena ditadura, fazendo emergir a presença operária na cena política e inspirando a busca por unificação nacional. Como reação, o regime militar promoveu intervenções em sindicatos, prisão de militantes e lideranças, além de processos baseados na Lei de Segurança Nacional."
+        }
+      ]
+    },
+    {
+      "aula": 5,
+      "titulo": "\"Tortura Nunca Mais!\": a ditadura civil-militar no Brasil",
+      "questoes": [
+        {
+          "secao": "Na Prática - Estação 1",
+          "numero": 1,
+          "pergunta": "Como a sucessão de leis e a criação de órgãos repressivos, mencionados no Texto I, institucionalizaram a violência do Estado durante a ditadura militar?",
+          "resposta": "Converteram a Doutrina de Segurança Nacional em um arcabouço jurídico-operacional, ampliando a noção de crime político para abranger qualquer ato contrário à ordem pública. A criação de redes como o DOI-Codi, Dops e SNI institucionalizou a vigilância, tortura e eliminação seletiva como métodos de atuação do Estado."
+        },
+        {
+          "secao": "Na Prática - Estação 1",
+          "numero": 2,
+          "pergunta": "De que modo as práticas da repressão, descritas no Texto II, evidenciam a atuação do Estado como agente da violência durante a ditadura militar?",
+          "resposta": "Evidenciam o uso metódico de órgãos públicos para aplicar torturas (310 variações catalogadas), forjar versões de mortes (atropelamento, suicídio) e praticar o desaparecimento forçado com sepultamento em valas comuns, agindo o Estado como autor, executor e encobridor dos crimes."
+        },
+        {
+          "secao": "Na Prática - Estação 2",
+          "numero": 3,
+          "pergunta": "Qual é a importância do projeto 'Brasil: Nunca Mais' para a documentação sobre a tortura e a afirmação dos direitos humanos diante das violações cometidas durante o regime militar? Cite as denúncias por meio da Fonte I.",
+          "resposta": "O projeto foi fundamental por reunir provas dos próprios arquivos da Justiça Militar que comprovaram que a tortura era método sistemático de Estado. A Fonte I relata o caso de Dulce Chaves Pandolfi, usada como 'cobaia' em demonstrações práticas de tortura para mais de 20 oficiais."
+        }
+      ]
+    },
+    {
+      "aula": 6,
+      "titulo": "Comissão Nacional da Verdade: o lugar da memória diante da violação dos direitos humanos",
+      "questoes": [
+        {
+          "secao": "Na Prática - Relatório Conclusão",
+          "numero": 1,
+          "pergunta": "Elabore um relatório com uma breve conclusão sobre a morte de Rubens Paiva pelo Estado brasileiro, em 1971, durante a ditadura civil-militar com base nas fontes apresentadas.",
+          "resposta": "Com base na Lei 12.528/2011, conclui-se que Rubens Paiva foi vítima de prisão arbitrária, tortura, morte sob custódia estatal e ocultação de cadáver em janeiro de 1971. A versão militar de resgate por terroristas foi desmentida pelo depoimento do tenente-médico Amilcar Lobo (que o atendeu no DOI com hemorragia por ruptura hepática) e pela confissão do coronel Ronaldo Campos, que admitiu ter incendiado o veículo para simular uma fuga após Paiva morrer no interrogatório."
+        }
+      ]
+    },
+    {
+      "aula": 7,
+      "titulo": "Diretas Já: mobilização popular por democracia no Brasil",
+      "questoes": [
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 1,
+          "pergunta": "O que é possível inferir sobre a Lei da Anistia com base no Texto I? Por que a afirmação de que a lei pode ser considerada limitada apresenta uma falsa percepção de legitimidade? Em que aspectos isso pode ser observado no discurso do General Figueiredo e na charge?",
+          "resposta": "Infere-se que a Lei de Anistia de 1979 consagrou uma 'anistia recíproca' que garantiu a impunidade dos agentes do Estado envolvidos em torturas e assassinatos. Embora vendida pelo discurso oficial do governo como um ato de 'reconciliação' e 'mãos estendidas', a charge e a análise histórica revelam um processo imposto sob coerção militar, que bloqueou a responsabilização individual por crimes contra a humanidade."
+        },
+        {
+          "secao": "Na Prática - Atividade 2",
+          "numero": 1,
+          "pergunta": "Qual era o conteúdo da proposta de emenda à Constituição de 1967, criada pelo Deputado Federal Dante de Oliveira? O que ela representava para o processo de redemocratização/transição política e enfraquecimento do regime ditatorial?",
+          "resposta": "A Emenda Dante de Oliveira propunha o restabelecimento das eleições diretas para a Presidência da República em novembro de 1984. Representava o fortalecimento da democracia ao devolver ao povo o poder de decisão e simbolizava a contestação direta do controle autoritário do regime militar, impulsionando a maior mobilização popular do período (Diretas Já)."
+        }
+      ]
+    },
+    {
+      "aula": 8,
+      "titulo": "Direitos e cidadania no Brasil: um projeto em construção",
+      "questoes": [
+        {
+          "secao": "Na Prática - Atividade 2",
+          "numero": 1,
+          "pergunta": "Por que a Constituição de 1988 representou um avanço no reconhecimento dos direitos das comunidades quilombolas e de outros grupos tradicionalmente marginalizados?",
+          "resposta": "Representou um avanço ao estabelecer pela primeira vez na história constitucional do Brasil o reconhecimento legal de seus territórios e a proteção de seu patrimônio cultural (Art. 216), assumindo o Estado o dever de promover a reparação histórica e a garantia de direitos a esses grupos."
+        },
+        {
+          "secao": "Na Prática - Atividade 2",
+          "numero": 2,
+          "pergunta": "Explique por que, mesmo com as garantias constitucionais, ainda existem desafios para a efetivação plena desses direitos na prática.",
+          "resposta": "Porque o reconhecimento formal em lei não garantiu a implementação imediata de políticas públicas nem a titulação célere das terras, enfrentando a oposição de interesses fundiários, burocracia estatal e preconceito estrutural."
+        }
+      ]
+    },
+    {
+      "aula": 9,
+      "titulo": "\"A Bancada do Batom\": a trajetória e a luta pelos direitos femininos na política",
+      "questoes": [
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 1,
+          "pergunta": "Identifique e explique o posicionamento contrário ao voto feminino apresentado por Zé Povo na charge. Como esse discurso reflete aspectos da sociedade patriarcal brasileira do início do século XX?",
+          "resposta": "Zé Povo expressa o temor de uma 'inversão' da ordem social estabelecida, na qual as mulheres passariam a 'dominar tudo'. Reflete a sociedade patriarcal ao considerar o espaço político estritamente masculino e enxergar a cidadania feminina como ameaça à estrutura familiar e social."
+        },
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 2,
+          "pergunta": "Compare a argumentação utilizada por Maurício Lacerda na charge e no documento dos Anais da Câmara. Como ele fundamenta juridicamente a defesa do voto feminino em ambas as fontes?",
+          "resposta": "Na charge, Lacerda usa um argumento direto afirmando que 'a Constituição é clara: as mulheres podem ser eleitoras'. Nos Anais da Câmara, fundamenta-se juridicamente no caso de D. Izabel Mattos Dillon e no Artigo 4º da Lei Saraiva, que estendia o direito de votar a todos os diplomados por faculdades do Império."
+        },
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 3,
+          "pergunta": "O caso de D. Izabel Mattos Dillon representa uma exceção à regra da época quanto à participação política feminina. Avalie criticamente por que esse precedente não foi suficiente para garantir o direito ao voto para todas as mulheres brasileiras naquele momento histórico.",
+          "resposta": "Porque tratou-se de uma decisão judicial isolada que exigia diploma de ensino superior — uma condição restrita a uma elite minúscula de mulheres — não alterando de forma geral e irrestrita a legislação eleitoral para o conjunto das mulheres brasileiras."
+        }
+      ]
+    },
+    {
+      "aula": 10,
+      "titulo": "Uma \"Nova República\" com pouca novidade: de Tancredo Neves a José Sarney",
+      "questoes": [
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 1,
+          "pergunta": "Quais medidas do Plano Cruzado contribuíram inicialmente para a redução da inflação?",
+          "resposta": "O congelamento total de preços, tarifas e serviços, a criação da nova moeda (Cruzado em substituição ao Cruzeiro) e o gatilho salarial (reajuste automático quando a inflação atingia 20%)."
+        },
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 2,
+          "pergunta": "Por que a decisão de Sarney de adiar o Plano Cruzado II para depois das eleições de 1986 foi criticada como 'estelionato eleitoral'?",
+          "resposta": "Porque o governo sustentou artificialmente o congelamento de preços para garantir a vitória eleitoral do PMDB em 1986. Logo após a eleição, lançou o Plano Cruzado II com aumentos de tarifas e liberação de preços, revelando que a estabilidade fora maquiada com fins eleitorais."
+        },
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 3,
+          "pergunta": "Por que o Plano Cruzado foi incapaz de resolver a crise inflacionária a longo prazo?",
+          "resposta": "Porque não corrigiu o déficit público nem conteve o excesso de demanda. O congelamento prolongado provocou desabastecimento nas prateleiras, cobrança de ágio e desorganização da produção, culminando na explosão da inflação com o descongelamento."
+        }
+      ]
+    },
+    {
+      "aula": 11,
+      "titulo": "Um \"caçador\" de marajás: do confisco da poupança ao impeachment, o governo Fernando Collor de Mello",
+      "questoes": [
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 1,
+          "pergunta": "O que explica, segundo Elvira Lobato, o rápido crescimento de Collor nas pesquisas?",
+          "resposta": "O discurso populista de combate à corrupção ('caça aos marajás'), o domínio da linguagem televisiva, boa imagem pessoal e o fato de vir de um estado (Alagoas) pouco conhecido nacionalmente, o que dificultava o acesso do eleitorado a dados reais sobre sua gestão anterior."
+        },
+        {
+          "secao": "Na Prática - Atividade 1",
+          "numero": 2,
+          "pergunta": "Qual foi o papel da imprensa na cobertura da campanha eleitoral de Collor e como isso influenciou sua imagem pública antes e depois da eleição?",
+          "resposta": "Inicialmente a mídia ajudou a projetar sua figura de 'caçador de marajás'. Posteriormente, reportagens investigativas passaram a revelar o uso de recursos públicos em sua campanha e, durante o governo, expuseram o esquema de corrupção PC Farias, sendo decisivas para a mobilização do impeachment."
+        },
+        {
+          "secao": "Na Prática - Atividade 2",
+          "numero": 1,
+          "pergunta": "A charge mostra eventos políticos entre 1989 e 1992 usando a metáfora do salto com vara. Explique como essa imagem representa a trajetória de Fernando Collor na política e o que cada fase do salto simboliza na história do Brasil.",
+          "resposta": "O início da corrida (1989) simboliza a ascensão eleitoral; a elevação no salto (1990-1991) representa o auge do poder com o lançamento das medidas radicais do Plano Collor; a queda dramática na água (1992) representa o colapso do governo gerado pela recessão, confisco da poupança, denúncias de corrupção e os protestos dos Caras-Pintadas culminando no impeachment."
+        }
+      ]
+    },
+    {
+      "aula": 12,
+      "titulo": "O Plano Real: um \"tíquete\" para a presidência da República",
+      "questoes": [
+        {
+          "secao": "Na Prática - Estação 1",
+          "numero": 1,
+          "pergunta": "Com base no Texto I, caracterize a situação econômica e social do Brasil quando Itamar Franco assumiu a Presidência da República. Em seguida, explique por que as autoras afirmam que a inflação teve um efeito perverso sobre a população.",
+          "resposta": "O país vivia hiperinflação, queda do PIB e desemprego de 15% na Grande SP. A inflação era perversa pois corroía diariamente o poder de compra dos mais pobres, que não tinham acesso a contas bancárias com correção diária, além de gerar escassez e desorganização social."
+        },
+        {
+          "secao": "Na Prática - Estação 1",
+          "numero": 2,
+          "pergunta": "Segundo o texto, o Plano Real inovou ao ser submetido ao debate público e ao utilizar a Unidade Real de Valor (URV) como 'embrião da nova moeda'. De que maneira se deu o funcionamento da URV?",
+          "resposta": "A URV funcionou como um indexador temporário que alinhava e corrigia os preços diariamente sem congelamento forçado, permitindo que a população entendesse o valor real das mercadorias antes da transição definitiva para o Real."
+        },
+        {
+          "secao": "Na Prática - Estação 2",
+          "numero": 4,
+          "pergunta": "Com base no Texto II, identifique duas medidas econômicas características da agenda neoliberal implementadas durante os governos de Fernando Henrique Cardoso.",
+          "resposta": "A privatização de empresas estatais e a abertura econômica internacional (com desregulamentação de mercados e incentivos ao capital estrangeiro)."
+        },
+        {
+          "secao": "Na Prática - Estação 2",
+          "numero": 5,
+          "pergunta": "Explique de que forma essas medidas contribuíram para o aumento do endividamento externo e do desemprego crônico, conforme apontam os autores.",
+          "resposta": "A manutenção da moeda sobrevalorizada para conter a inflação prejudicou a balança comercial, exigindo empréstimos do FMI e elevando a dívida externa. A abertura sem proteção expôs a indústria nacional à concorrência externa, gerando fechamento de empresas e desemprego."
+        },
+        {
+          "secao": "Na Prática - Estação 3",
+          "numero": 6,
+          "pergunta": "A partir do Texto III e da análise da Fonte II, discuta os impactos das políticas econômicas de orientação neoliberal adotadas no Brasil nos anos 1990.",
+          "resposta": "Promoveram flexibilização das leis trabalhistas e expansão do trabalho precário, entrando em conflito com os direitos sociais de 1988. Como indicam os dados, o desemprego médio subiu de 13,16% (1995) para mais de 18% (1998/1999), com crescimento econômico instável."
+        }
+      ]
+    }
+  ],
+  "caderno_de_exercicios": [
+    {
+      "topico": "Ditadura civil-militar",
+      "aula_referencia": "Aula 1",
+      "numero": 1,
+      "banca": "UFPR 2017",
+      "pergunta": "Sobre a questão indígena na ditadura militar, assinale a alternativa correta.",
+      "alternativas": {
+        "a": "Projetos como a construção das hidrelétricas de Itaipu e de Tucuruí impulsionaram o desenvolvimento econômico de várias comunidades indígenas graças aos projetos executados pela Funai.",
+        "b": "Apesar das mortes contabilizadas no relatório da CNV, após o golpe civil-militar, os indígenas passaram a ser valorizados no novo período econômico.",
+        "c": "No período da Ditadura Militar, foi criada a Guarda Nacional Indígena integrada exclusivamente por responsáveis pelo policiamento para manutenção de sua cultura.",
+        "d": "Com o golpe civil-militar, devido às construções de grandes obras, a mão de obra indígena começou a ser parcialmente valorizada pelo governo Figueiredo.",
+        "e": "Após o golpe civil-militar, um novo período econômico se iniciou no Brasil, com construções de grandes obras nas quais os indígenas passaram a ser tratados como obstáculos para o desenvolvimento nacional."
+      },
+      "resposta_correta": "e",
+      "justificativa": "Durante a ditadura civil-militar, os territórios e comunidades indígenas foram tratados como entraves e obstáculos ao avanço dos projetos desenvolvimentistas e obras de infraestrutura do Estado."
+    },
+    {
+      "topico": "Ditadura civil-militar",
+      "aula_referencia": "Aula 2",
+      "numero": 2,
+      "banca": "ENEM 2017",
+      "pergunta": "A alteração legal no Brasil contemporâneo descrita no texto (obrigatoriedade do ensino de História e Cultura Afro-brasileira - Lei 10.639/2003) é resultado do processo de:",
+      "alternativas": {
+        "a": "aumento da renda nacional.",
+        "b": "mobilização do movimento negro.",
+        "c": "melhoria da infraestrutura escolar.",
+        "d": "ampliação das disciplinas obrigatórias.",
+        "e": "politização das universidades públicas."
+      },
+      "resposta_correta": "b",
+      "justificativa": "A alteração resultou diretamente da histórica luta e mobilização do Movimento Negro brasileiro por reconhecimento e combate ao racismo na educação."
+    },
+    {
+      "topico": "Transição democrática: do fim da ditadura à redemocratização",
+      "aula_referencia": "Aula 3",
+      "numero": 1,
+      "banca": "UNESP 2022",
+      "pergunta": "O modelo abordado no excerto idealizado por Chico Mendes corresponde à:",
+      "alternativas": {
+        "a": "reserva extrativista, que assegura a proteção florestal e das populações tradicionais.",
+        "b": "estação ecológica, que permite a realização de pesquisas científicas básicas e aplicadas.",
+        "c": "área endêmica, que abriga exemplares raros da biota regional.",
+        "d": "área agroecológica, que permite a prática da permacultura e garante a justiça social.",
+        "e": "reserva biológica, que preserva o equilíbrio natural sem a intervenção humana."
+      },
+      "resposta_correta": "a",
+      "justificativa": "Chico Mendes idealizou as Reservas Extrativistas (Resex), modelo sustentável que une preservação ambiental com o uso tradicional pelas populações locais."
+    },
+    {
+      "topico": "Transição democrática: do fim da ditadura à redemocratização",
+      "aula_referencia": "Aula 3",
+      "numero": 2,
+      "banca": "ENEM 2020",
+      "pergunta": "De acordo com o texto, a visibilidade dos seringueiros amazônicos foi estabelecida pela relação entre:",
+      "alternativas": {
+        "a": "crescimento econômico e migração de trabalhadores.",
+        "b": "produção de borracha e escassez de recursos naturais.",
+        "c": "reivindicação de terra e preservação de mata nativa.",
+        "d": "incentivo governamental e conservação de territórios.",
+        "e": "modernização de plantio e comércio de látex."
+      },
+      "resposta_correta": "c",
+      "justificativa": "Os seringueiros destacaram-se pela articulação política que associou o direito à posse da terra à preservação da floresta em pé."
+    },
+    {
+      "topico": "Transição democrática: do fim da ditadura à redemocratização",
+      "aula_referencia": "Aula 4",
+      "numero": 3,
+      "banca": "UERJ 2021",
+      "pergunta": "Na história do movimento sindical no Brasil, a greve dos metalúrgicos do ABC, em São Paulo, em 1979, representa um marco. Sua importância esteve associada aos seguintes fatores:",
+      "alternativas": {
+        "a": "regularização da liberdade de associação e anistia das lideranças locais.",
+        "b": "interrupção de setor produtivo estratégico e respaldo da sociedade civil.",
+        "c": "garantia da estabilidade de emprego e flexibilização do corporativismo profissional.",
+        "d": "fortalecimento do equilíbrio econômico nacional e modernização das relações capitalistas."
+      },
+      "resposta_correta": "b",
+      "justificativa": "A paralisação atingiu o polo automobilístico/metalúrgico estratégico e mobilizou expressivo apoio popular, enfraquecendo o controle do regime militar."
+    },
+    {
+      "topico": "Transição democrática: do fim da ditadura à redemocratização",
+      "aula_referencia": "Aula 5",
+      "numero": 4,
+      "banca": "UNICAMP 2024",
+      "pergunta": "É correto afirmar, sobre os eventos narrados (morte de Vladimir Herzog e censura), que:",
+      "alternativas": {
+        "a": "Rita Lee, Elis Regina, Caetano Veloso, Chico Buarque, entre outros, tiveram suas músicas censuradas, apesar da manutenção da garantia constitucional da liberdade de expressão.",
+        "b": "a Ditadura Militar permitiu a continuidade do Partido Comunista Brasileiro e perseguia sua atuação revolucionária vinculada a Stalin.",
+        "c": "centros de detenção da Ditadura Militar, como o DOI-CODI, operaram dentro da legalidade constitucional.",
+        "d": "Vladimir Herzog e outros jornalistas foram vítimas de perseguição política, prisões, torturas e execuções realizadas por militares, com apoio de parte da sociedade civil, em nome da ideologia da segurança nacional."
+      },
+      "resposta_correta": "d",
+      "justificativa": "O assassinato de Herzog no DOI-Codi reflete o terror de Estado legitimado pela Doutrina de Segurança Nacional."
+    },
+    {
+      "topico": "Transição democrática: do fim da ditadura à redemocratização",
+      "aula_referencia": "Aula 6",
+      "numero": 5,
+      "banca": "ENEM 2014",
+      "pergunta": "O objetivo da Comissão Nacional da Verdade (CNV) é:",
+      "alternativas": {
+        "a": "anular a anistia concedida aos chefes militares.",
+        "b": "rever as condenações judiciais dos presos políticos.",
+        "c": "perdoar os crimes atribuídos aos militantes esquerdistas.",
+        "d": "comprovar o apoio da sociedade aos golpistas anticomunistas.",
+        "e": "esclarecer as circunstâncias de violações aos direitos humanos."
+      },
+      "resposta_correta": "e",
+      "justificativa": "A CNV foi criada para examinar documentos e colher relatos com o intuito de esclarecer os atos de grave violação dos direitos humanos cometidos pelo Estado."
+    },
+    {
+      "topico": "Transição democrática: do fim da ditadura à redemocratização",
+      "aula_referencia": "Aula 7",
+      "numero": 6,
+      "banca": "ENEM 2016",
+      "pergunta": "A imagem (charge das Diretas Já por Henfil) faz referência a uma intensa mobilização popular e pode ser traduzida como:",
+      "alternativas": {
+        "a": "a campanha popular que confrontava a legitimidade das eleições indiretas no país.",
+        "b": "a manifestação de milhares de pessoas em prol da realização de eleições para o Senado.",
+        "c": "as passeatas realizadas em prol do fim da ditadura militar no Brasil e na Argentina.",
+        "d": "os comícios e manifestações populares pela abertura política de forma lenta e segura.",
+        "e": "o movimento que exigia o direito à igualdade de voto para homens e mulheres."
+      },
+      "resposta_correta": "a",
+      "justificativa": "A charge retrata a pressão popular das Diretas Já que questionava o modelo indireto de escolha do Presidente mantido pela ditadura."
+    },
+    {
+      "topico": "Redemocratização no Brasil: a Constituição de 1988",
+      "aula_referencia": "Aula 8",
+      "numero": 1,
+      "banca": "ENEM 2015",
+      "pergunta": "No processo da redemocratização brasileira, os novos movimentos sociais contribuíram para:",
+      "alternativas": {
+        "a": "diminuir a legitimidade dos novos partidos políticos então criados.",
+        "b": "tornar a democracia um valor social que ultrapassa os momentos eleitorais.",
+        "c": "difundir a democracia representativa como objetivo fundamental da luta política.",
+        "d": "ampliar as disputas pela hegemonia das entidades de trabalhadores com os sindicatos.",
+        "e": "fragmentar as lutas políticas dos diversos atores sociais frente ao Estado."
+      },
+      "resposta_correta": "b",
+      "justificativa": "Os movimentos sociais estenderam o sentido de cidadania e democracia para além da mera votação periódica."
+    },
+    {
+      "topico": "Redemocratização no Brasil: a Constituição de 1988",
+      "aula_referencia": "Aula 9",
+      "numero": 2,
+      "banca": "ENEM 2013",
+      "pergunta": "Na imagem, da década de 1930, há uma crítica à conquista de um direito pelas mulheres relacionado com a:",
+      "alternativas": {
+        "a": "redivisão do trabalho doméstico.",
+        "b": "liberdade de orientação sexual.",
+        "c": "garantia de equiparação salarial.",
+        "d": "aprovação do direito de divórcio.",
+        "e": "obtenção da participação eleitoral."
+      },
+      "resposta_correta": "e",
+      "justificativa": "A charge satiriza de forma conservadora a conquista do voto feminino promovida pelo Código Eleitoral de 1932."
+    },
+    {
+      "topico": "Nova República",
+      "aula_referencia": "Aula 10",
+      "numero": 1,
+      "banca": "ENEM 2016",
+      "pergunta": "O período descrito (Nova República) apresenta continuidades e rupturas. Uma dessas continuidades consistiu na:",
+      "alternativas": {
+        "a": "representação do legislativo com a fórmula do bipartidarismo.",
+        "b": "detenção de lideranças populares por crimes de subversão.",
+        "c": "presença de políticos com trajetórias no regime autoritário.",
+        "d": "prorrogação das restrições advindas dos atos institucionais.",
+        "e": "estabilidade da economia com o congelamento anual de preços."
+      },
+      "resposta_correta": "c",
+      "justificativa": "Muitas figuras políticas atuantes no regime militar (como o próprio presidente José Sarney) continuaram no poder durante a Nova República."
+    },
+    {
+      "topico": "Nova República",
+      "aula_referencia": "Aula 11",
+      "numero": 2,
+      "banca": "ENEM 2011",
+      "pergunta": "O movimento representado na imagem (Caras-Pintadas do início dos anos 1990):",
+      "alternativas": {
+        "a": "aliou-se aos partidos de oposição e organizou a campanha Diretas Já.",
+        "b": "manifestou-se contra a corrupção e pressionou pela aprovação da Lei da Ficha Limpa.",
+        "c": "engajou-se nos protestos-relâmpago e utilizou a internet para agendar suas manifestações.",
+        "d": "espelhou-se no movimento estudantil de 1968 e protagonizou ações revolucionárias armadas.",
+        "e": "tornou-se porta-voz da sociedade e influenciou no processo de impeachment do então presidente Collor."
+      },
+      "resposta_correta": "e",
+      "justificativa": "A mobilização dos jovens Caras-Pintadas em 1992 foi um motor fundamental para aumentar a pressão política pelo impeachment de Fernando Collor."
+    },
+    {
+      "topico": "Nova República",
+      "aula_referencia": "Aula 12",
+      "numero": 4,
+      "banca": "ESAMC 2015",
+      "pergunta": "A interpretação da charge sobre o governo de Fernando Henrique Cardoso permite concluir que seu autor:",
+      "alternativas": {
+        "a": "defende o processo de venda de empresas estatais a grupos privados.",
+        "b": "ironiza a postura neutra do presidente diante do processo de privatizações.",
+        "c": "critica a venda de empresas estatais do setor de comunicações.",
+        "d": "ironiza o processo de privatização de empresas estatais.",
+        "e": "defende a privatização de empresas do setor de telefonia."
+      },
+      "resposta_correta": "d",
+      "justificativa": "A charge satiriza a ampla agenda de privatizações promovida pelo governo FHC ao retratar o presidente vendendo até o próprio aparelho que utiliza."
+    },
+    {
+      "topico": "Nova República",
+      "aula_referencia": "Aula 12",
+      "numero": 5,
+      "banca": "UFPR 2010",
+      "pergunta": "Com relação ao modelo econômico que prevalece no Brasil desde o início da década de 1990, é correto afirmar que ele:",
+      "alternativas": {
+        "a": "radicalizou o protecionismo tarifário a fim de proteger as indústrias nacionais.",
+        "b": "promoveu a intensificação da internacionalização da economia, abrindo novos setores econômicos à participação do capital estrangeiro e recorrendo às privatizações.",
+        "c": "criou novas empresas estatais e expandiu as já existentes.",
+        "d": "restringiu a participação do capital estrangeiro em diversos setores.",
+        "e": "optou pela não redução de quaisquer direitos trabalhistas."
+      },
+      "resposta_correta": "b",
+      "justificativa": "A diretriz econômica iniciada nos anos 90 seguiu a orientação neoliberal com abertura comercial e privatização de estatais."
+    }
+  ]
+};
+
+// Renderização e Sintaxe no DOM
+document.getElementById('json-code').innerHTML = syntaxHighlight(JSON.stringify(historiaData, null, 2));
+
+function syntaxHighlight(json) {
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'json-number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'json-key';
+            } else {
+                cls = 'json-string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'json-boolean';
+        } else if (/null/.test(match)) {
+            cls = 'json-null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}
+
+function copyJson() {
+    navigator.clipboard.writeText(JSON.stringify(historiaData, null, 2));
+    alert('JSON copiado com sucesso!');
+}
+</script>
+
+</body>
+</html>
